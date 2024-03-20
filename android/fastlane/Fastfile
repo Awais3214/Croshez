@@ -32,12 +32,13 @@ platform :android do
 
   desc "Deploy a new version to the Google Play"
   lane :deploy do
+    gradle(task: "clean bundleRelease")
+    sh "flutter build appbundle"
     upload_to_play_store(
       track: 'internal',
-      release_status: 'completed',
+      release_status: 'draft',
       skip_upload_apk: true,
       skip_upload_changelogs: true,
-      version_code: 2,
       aab: "../build/app/outputs/bundle/release/app-release.aab",
     )
   end
