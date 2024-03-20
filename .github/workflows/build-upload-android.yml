@@ -32,7 +32,7 @@ jobs:
           encodedString: ${{ secrets.KEYSTORE_FILE }}
 
       - name: Build & deploy Android release
-        run: bundle exec fastlane deploy
+        run: fastlane deploy
         env:
           KEYSTORE_FILE: ${{ steps.android_keystore.outputs.filePath }}
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
@@ -45,4 +45,4 @@ jobs:
         with:
           name: assets
           path: |
-            ${{ github.workspace }}/app/build/outputs/bundle/release
+            ${{ github.workspace }}/app/build/outputs/bundle/app-release.aab
