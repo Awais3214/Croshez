@@ -33,7 +33,7 @@ platform :android do
   desc "Deploy a new version to the Google Play"
   lane :deploy do
     gradle(
-      task: "clean bundleRelease"
+      task: "clean bundleRelease",
       gradle_path: "/Users/awaiskayani/croshez/android/gradlew"
     )
     sh "flutter build appbundle"
