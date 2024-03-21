@@ -31,11 +31,8 @@ jobs:
           fileName: "android_keystore.keystore"
           encodedString: ${{ secrets.KEYSTORE_FILE }}
 
-      - name: Change directory
-        run: cd android
-
       - name: Build & deploy Android release
-        run: fastlane android deploy
+        run: cd android fastlane android deploy
         env:
           KEYSTORE_FILE: ${{ steps.android_keystore.outputs.filePath }}
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
