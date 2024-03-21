@@ -34,7 +34,6 @@ platform :android do
   lane :deploy do
     gradle(
       task: "clean bundleRelease",
-      gradle_path: "/Users/awaiskayani/croshez/android/gradle/wrapper",
     )
     sh "flutter build appbundle"
     upload_to_play_store(
