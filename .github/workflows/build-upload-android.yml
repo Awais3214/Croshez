@@ -35,7 +35,7 @@ jobs:
         run: cd android
 
       - name: Build & deploy Android release
-        run: fastlane deploy
+        run: fastlane android deploy
         env:
           KEYSTORE_FILE: ${{ steps.android_keystore.outputs.filePath }}
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
