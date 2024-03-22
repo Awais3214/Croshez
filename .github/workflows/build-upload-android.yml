@@ -31,20 +31,25 @@ jobs:
           fileName: "android_keystore.keystore"
           encodedString: ${{ secrets.KEYSTORE_FILE }}
 
-      - name: Build & deploy Android release
-        run: |
-          cd android && fastlane android deploy
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}
-          KEYSTORE_FILE: ${{ steps.android_keystore.outputs.filePath }}
-          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-          KEY_ALIAS: ${{ secrets.KEY_ALIAS}}
-          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-          ANDROID_JSON_KEY_FILE: ${{ steps.service_account_json_file.outputs.filePath }}
+      
+      - name: Create Google Play JSON Credentials
+        run: echo "${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}" > /tmp/google_play.json
+        shell: bash
 
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: assets
-          path: |
-            ${{ github.workspace }}/app/build/outputs/bundle/app-release.aab
+      # - name: Build & deploy Android release
+      #   run: |
+      #     cd android && fastlane android deploy
+      #   env:
+      #     GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}
+      #     KEYSTORE_FILE: ${{ steps.android_keystore.outputs.filePath }}
+      #     KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+      #     KEY_ALIAS: ${{ secrets.KEY_ALIAS}}
+      #     KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+      #     ANDROID_JSON_KEY_FILE: ${{ steps.service_account_json_file.outputs.filePath }}
+
+      # - name: Upload build artifacts
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: assets
+      #     path: |
+      #       ${{ github.workspace }}/app/build/outputs/bundle/app-release.aab
