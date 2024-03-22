@@ -33,7 +33,7 @@ jobs:
 
       - name: Create Service Account JSON File
         run: |
-          echo "${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}" > ./android/fastlane/Gplay.json
+          echo "${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}" > android/fastlane/Gplay.json
         shell: bash
 
       - name: Build & deploy Android release
