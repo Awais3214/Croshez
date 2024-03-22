@@ -30,6 +30,7 @@ migrate_working_dir/
 .packages
 .pub-cache/
 .pub/
+pc-api-7935694389038947557-744-64209b228b2e.json
 
 # Symbolication related
 app.*.symbols
