@@ -33,7 +33,7 @@ jobs:
 
       - name: Change to build directory
         run: |
-          cd build/app/outputs/bundle/ && ls
+          cd build/app/outputs/bundle/release && ls
 
       # - name: Build & deploy Android release
       #   run: |
