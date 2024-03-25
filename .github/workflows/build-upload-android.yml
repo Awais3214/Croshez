@@ -33,7 +33,7 @@ jobs:
 
       - name: Create Service Account JSON File
         run: |
-          echo "${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}" > /home/runner/work/Croshez/android/Gplay.json
+          cd android && echo "${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}" > Gplay.json
         shell: bash
 
       # - name: Install Dependencies
