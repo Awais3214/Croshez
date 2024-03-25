@@ -36,12 +36,13 @@ jobs:
           echo "${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}" > /home/runner/work/Croshez/Croshez/android/Gplay.json
         shell: bash
 
-      - name: Install Dependencies
-        run: bundle install
+      # - name: Install Dependencies
+      #   run: bundle install
 
       - name: Build & deploy Android release
         run: |
-          cd android && bundle exec fastlane android deploy
+          # cd android && bundle exec fastlane android deploy
+          cd android && fastlane android deploy
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}
           KEYSTORE_FILE: ${{ steps.android_keystore.outputs.filePath }}
