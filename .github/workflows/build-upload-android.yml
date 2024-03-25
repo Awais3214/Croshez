@@ -44,9 +44,8 @@ jobs:
       # - name: Install Dependencies
       #   run: bundle install
 
-      - name: Get Fastlane Version
-        run: |
-          fastlane run get_version_number
+      - name: Print Fastlane version
+        run: fastlane --version
       
       # - name: Build & deploy Android release
       #   run: |
