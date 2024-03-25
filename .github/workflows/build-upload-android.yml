@@ -44,13 +44,14 @@ jobs:
       # - name: Install Dependencies
       #   run: bundle install
 
-      - name: Print Fastlane version
-        run: fastlane --version
+      - name: Build & deploy Android release
+        run: |
+          ls && cd android && ls
       
-      # - name: Build & deploy Android release
-      #   run: |
-      #     # cd android && bundle exec fastlane android deploy
-      #     cd android && fastlane action upload_to_play_store
+      - name: Build & deploy Android release
+        run: |
+          # cd android && bundle exec fastlane android deploy
+          cd android && fastlane android deploy --json_key "my_secret.json"
       #   env:
       #     GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}
       #     KEYSTORE_FILE: ${{ steps.android_keystore.outputs.filePath }}
