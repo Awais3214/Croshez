@@ -41,6 +41,15 @@ jobs:
         env:
           MY_JSON_SECRET: ${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}
 
+      - name: Check if file is valid JSON
+        run: |
+          if jq empty < my_secret.json; then
+            echo "The file is valid JSON."
+          else
+            echo "The file is not valid JSON."
+            exit 1
+          fi
+
       # - name: Install Dependencies
       #   run: bundle install
 
@@ -48,10 +57,10 @@ jobs:
       #   run: |
       #     pwd
       
-      - name: Build & deploy Android release
-        run: |
-          # cd android && bundle exec fastlane android deploy
-          cd android && fastlane android deploy
+      # - name: Build & deploy Android release
+      #   run: |
+      #     # cd android && bundle exec fastlane android deploy
+      #     cd android && fastlane android deploy
       #   env:
       #     GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}
       #     KEYSTORE_FILE: ${{ steps.android_keystore.outputs.filePath }}
