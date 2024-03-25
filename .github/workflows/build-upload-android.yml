@@ -31,17 +31,22 @@ jobs:
           fileName: "android_keystore.keystore"
           encodedString: ${{ secrets.KEYSTORE_FILE }}
 
-      - name: Create Service Account JSON File
-        run: |
-          cd android && echo "${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}" > Gplay.json
-        shell: bash
+      # - name: Create Service Account JSON File
+      #   run: |
+      #     cd android && echo "${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}" > Gplay.json
+      #   shell: bash
+
+      - name: Decode JSON secret and write to file
+        run: echo "$GPLAY_SERVICE_ACCOUNT_KEY_JSON" > my_secret.json
+        env:
+          MY_JSON_SECRET: ${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}
 
       # - name: Install Dependencies
       #   run: bundle install
 
-      - name: Print json file
+      - name: Print JSON file
         run: |
-          cd android && echo Gplay.json
+          cd android && echo my_secret.json
       
       # - name: Build & deploy Android release
       #   run: |
