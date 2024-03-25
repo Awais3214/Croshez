@@ -17,41 +17,41 @@ jobs:
           ruby-version: 3.2.2
           bundler-cache: true
 
-      - name: Decode Service Account Key JSON File
-        uses: timheuer/base64-to-file@v1
-        id: service_account_json_file
-        with:
-          fileName: "serviceAccount.json"
-          encodedString: ${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}
+      # - name: Decode Service Account Key JSON File
+      #   uses: timheuer/base64-to-file@v1
+      #   id: service_account_json_file
+      #   with:
+      #     fileName: "serviceAccount.json"
+      #     encodedString: ${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}
 
-      - name: Decode Keystore File
-        uses: timheuer/base64-to-file@v1
-        id: android_keystore
-        with:
-          fileName: "android_keystore.keystore"
-          encodedString: ${{ secrets.KEYSTORE_FILE }}
+      # - name: Decode Keystore File
+      #   uses: timheuer/base64-to-file@v1
+      #   id: android_keystore
+      #   with:
+      #     fileName: "android_keystore.keystore"
+      #     encodedString: ${{ secrets.KEYSTORE_FILE }}
 
       # - name: Create Service Account JSON File
       #   run: |
       #     cd android && echo "${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}" > Gplay.json
       #   shell: bash
 
-      - name: Decode JSON secret and write to file
-        run: echo "$GPLAY_SERVICE_ACCOUNT_KEY_JSON" > my_secret.json
-        env:
-          MY_JSON_SECRET: ${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}
+      # - name: Decode JSON secret and write to file
+      #   run: echo "$GPLAY_SERVICE_ACCOUNT_KEY_JSON" > my_secret.json
+      #   env:
+      #     MY_JSON_SECRET: ${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}
 
       # - name: Install Dependencies
       #   run: bundle install
 
-      - name: Build & deploy Android release
+      - name: Faslane validity
         run: |
-          ls && cd android && ls
+          fastlane run validate_play_store_json_key
       
-      - name: Build & deploy Android release
-        run: |
-          # cd android && bundle exec fastlane android deploy
-          cd android && fastlane android deploy --json_key "my_secret.json"
+      # - name: Build & deploy Android release
+      #   run: |
+      #     # cd android && bundle exec fastlane android deploy
+      #     cd android && fastlane android deploy --json_key "my_secret.json"
       #   env:
       #     GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}
       #     KEYSTORE_FILE: ${{ steps.android_keystore.outputs.filePath }}
