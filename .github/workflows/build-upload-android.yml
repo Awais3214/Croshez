@@ -46,7 +46,8 @@ jobs:
 
       - name: Faslane Deploy
         run: |
-          cd android && fastlane android deploy --verbose
+          cd android
+          # && fastlane android deploy --verbose
 
       - name: Path
         run: |
