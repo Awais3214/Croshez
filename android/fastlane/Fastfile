@@ -38,7 +38,7 @@ platform :android do
     # )
     # sh "flutter build appbundle"
     validate_play_store_json_key(
-      json_key: './my_secret.json'
+      json_key: "#{ENV['GITHUB_WORKSPACE']}/android/my_secret.json"
     )
     upload_to_play_store(
       track: 'internal',
