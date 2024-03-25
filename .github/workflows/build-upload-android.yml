@@ -46,7 +46,7 @@ jobs:
 
       - name: Print JSON file
         run: |
-          cd android && ls
+          ls
       
       # - name: Build & deploy Android release
       #   run: |
