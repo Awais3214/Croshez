@@ -36,6 +36,9 @@ jobs:
           echo "${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}" > /home/runner/work/Croshez/Croshez/android/Gplay.json
         shell: bash
 
+      - name: Install Dependencies
+        run: bundle install
+
       - name: Build & deploy Android release
         run: |
           cd android && bundle exec fastlane android deploy
