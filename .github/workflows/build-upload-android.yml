@@ -36,10 +36,10 @@ jobs:
       #     cd android && echo "${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}" > Gplay.json
       #   shell: bash
 
-      # - name: Decode JSON secret and write to file
-      #   run: echo "$GPLAY_SERVICE_ACCOUNT_KEY_JSON" > my_secret.json
-      #   env:
-      #     MY_JSON_SECRET: ${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}
+      - name: Decode JSON secret and write to file
+        run: echo "$GPLAY_SERVICE_ACCOUNT_KEY_JSON" > my_secret.json
+        env:
+          MY_JSON_SECRET: ${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}
 
       # - name: Install Dependencies
       #   run: bundle install
