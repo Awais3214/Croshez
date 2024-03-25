@@ -30,12 +30,16 @@ platform :android do
     # You can also use other beta testing services here
   end
 
+
   desc "Deploy a new version to the Google Play"
   lane :deploy do
     # gradle(
     #   task: "clean bundleRelease",
     # )
     # sh "flutter build appbundle"
+    validate_play_store_json_key(
+      json_key: './my_secret.json'
+    )
     upload_to_play_store(
       track: 'internal',
       release_status: 'draft',
