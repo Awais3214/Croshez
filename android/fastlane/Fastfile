@@ -43,6 +43,7 @@ platform :android do
       skip_upload_changelogs: true,
       validate_only: true,
       aab: "../build/app/outputs/bundle/release/app-release.aab",
+      json_key: "./my_secret.json",
     )
   end
 end
