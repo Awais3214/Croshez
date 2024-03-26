@@ -45,7 +45,6 @@ platform :android do
       release_status: 'draft',
       skip_upload_apk: true,
       skip_upload_changelogs: true,
-      validate_only: true,
       aab: "../build/app/outputs/bundle/release/app-release.aab",
       json_key: "#{ENV['GITHUB_WORKSPACE']}/android/my_secret.json",
       # json_key: "/home/runner/work/Croshez/Croshez/android/my_secret.json",
