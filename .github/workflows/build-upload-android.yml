@@ -23,9 +23,6 @@ jobs:
       - name: Install Flutter Dependencies
         run: flutter pub get
 
-      - name: Build Flutter APK
-        run: flutter build apk --release
-
       - name: Fastlane Deploy
         run: |
           cd android && fastlane android deploy --verbose
