@@ -33,10 +33,10 @@ platform :android do
 
   desc "Deploy a new version to the Google Play"
   lane :deploy do
-    # gradle(
-    #   task: "clean bundleRelease",
-    # )
-    # sh "flutter build appbundle"
+    gradle(
+      task: "clean bundleRelease",
+    )
+    sh "flutter build appbundle"
     validate_play_store_json_key(
       json_key: "#{ENV['GITHUB_WORKSPACE']}/android/my_secret.json"
     )
