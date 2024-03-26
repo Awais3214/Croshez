@@ -9,7 +9,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
@@ -17,62 +16,16 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.19.1'
-      # - name: Set up ruby env
-      #   uses: ruby/setup-ruby@v1
-      #   with:
-      #     ruby-version: 3.2.2
-      #     bundler-cache: true
-
-      # - name: Decode Service Account Key JSON File
-      #   uses: timheuer/base64-to-file@v1
-      #   id: service_account_json_file
-      #   with:
-      #     fileName: "serviceAccount.json"
-      #     encodedString: ${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}
-
-      # - name: Decode Keystore File
-      #   uses: timheuer/base64-to-file@v1
-      #   id: android_keystore
-      #   with:
-      #     fileName: "android_keystore.keystore"
-      #     encodedString: ${{ secrets.KEYSTORE_FILE }}
-
-      # - name: Create Service Account JSON File
-      #   run: |
-      #     cd android && echo "${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}" > Gplay.json
-      #   shell: bash
 
       - name: Decode JSON secret and write to file
-        run: echo "$GPLAY_SERVICE_ACCOUNT_KEY_JSON" > my_secret.json
-        env:
-          MY_JSON_SECRET: ${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}
+        run: echo "${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}" > android/my_secret.json
 
-      # - name: Install Dependencies
-      #   run: bundle install
+      - name: Install Flutter Dependencies
+        run: flutter pub get
 
-      - name: Faslane Deploy
+      - name: Build Flutter APK
+        run: flutter build apk --release
+
+      - name: Fastlane Deploy
         run: |
           cd android && fastlane android deploy --verbose
-
-      - name: Path
-        run: |
-          cd android && ls
-      
-      # - name: Build & deploy Android release
-      #   run: |
-      #     # cd android && bundle exec fastlane android deploy
-      #     cd android && fastlane android deploy --json_key "my_secret.json"
-      #   env:
-      #     GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}
-      #     KEYSTORE_FILE: ${{ steps.android_keystore.outputs.filePath }}
-      #     KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-      #     KEY_ALIAS: ${{ secrets.KEY_ALIAS}}
-      #     KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-      #     ANDROID_JSON_KEY_FILE: ${{ steps.service_account_json_file.outputs.filePath }}
-
-      # - name: Upload build artifacts
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: assets
-      #     path: |
-      #       ${{ github.workspace }}/app/build/outputs/bundle/app-release.aab
