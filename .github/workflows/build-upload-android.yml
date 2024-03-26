@@ -25,6 +25,9 @@ jobs:
       - name: Decode JSON secret and write to file
         run: echo "${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}" > android/my_secret.json
 
+      - name: Clean build
+        run: flutter clean
+
       - name: Install Flutter Dependencies
         run: flutter pub get
 
