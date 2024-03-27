@@ -26,9 +26,6 @@ def keystorePropertiesFile = rootProject.file('key.properties')
    if (keystorePropertiesFile.exists()) {
        keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 }
-
-subprojects{
-    afterEvaluate {
         android {
             compileSdkVersion flutter.compileSdkVersion
             ndkVersion flutter.ndkVersion
@@ -78,8 +75,6 @@ subprojects{
                 }
             }
         }
-    }
-}
 
 flutter {
     source '../..'
