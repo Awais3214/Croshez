@@ -22,6 +22,11 @@ jobs:
         with:
           flutter-version: '3.19.1'
 
+      - run: |
+          echo keyPassword=\${{ secrets.KEY_STORE }} > ${{env.PROPERTIES_PATH}}
+          echo storePassword=\${{ secrets.KEY_PASSWORD }} >> ${{env.PROPERTIES_PATH}}
+          echo keyAlias=\${{ secrets.KEY_ALIAS }} >> ${{env.PROPERTIES_PATH}}
+
       - name: Build apk
         run: | 
           flutter clean && flutter pub get && flutter build apk
