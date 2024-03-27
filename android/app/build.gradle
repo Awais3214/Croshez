@@ -58,13 +58,17 @@ def keystorePropertiesFile = rootProject.file('key.properties')
                 versionName flutterVersionName
                 multiDexEnabled true
             }
-          signingConfigs {
-               release {
-                   keyAlias keystoreProperties['keyAlias']
-                   keyPassword keystoreProperties['keyPassword']
-                   storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
-                   storePassword keystoreProperties['storePassword']
-               }
+              signingConfigs {
+        release {
+            //From decoded key
+            storeFile = file('key.jks')
+            
+            //From key.properties
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storePassword keystoreProperties['storePassword']
+        }
+    }
               namespace "com.example.croshez"
            }
             buildTypes {
