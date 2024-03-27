@@ -12,7 +12,7 @@ platform :android do
   lane :deploy do
     # Ensure the Flutter environment is available
     sh "flutter pub get"
-    sh "futter build appbundle"
+    sh "flutter build appbundle"
     # Validate the Play Store JSON key
     validate_play_store_json_key(
       json_key: "#{ENV['GITHUB_WORKSPACE']}/android/my_secret.json"
