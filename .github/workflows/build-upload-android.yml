@@ -37,6 +37,9 @@ jobs:
       - name: Install Flutter Dependencies
         run: flutter pub get
 
+      - name: Print JSON Key File Content
+        run: cat android/my_secret.json
+
       - name: Fastlane Deploy
         run: |
           cd android && fastlane android deploy --verbose
