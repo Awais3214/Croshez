@@ -70,7 +70,7 @@ def keystorePropertiesFile = rootProject.file('key.properties')
         }
     }
               namespace "com.example.croshez"
-           }
+           
             buildTypes {
                 release {
                     // TODO: Add your own signing config for the release build.
@@ -78,6 +78,7 @@ def keystorePropertiesFile = rootProject.file('key.properties')
                     signingConfig signingConfigs.release
                 }
             }
+        }
         
 
 flutter {
