@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+env:
+ PROPERTIES_PATH: "./android/key.properties"
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -20,13 +23,16 @@ jobs:
           
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.19.1'
+          flutter-version: ${env.FLUTTER_VERSION}
 
       - name: Create keystore.properties file
         run: |
           echo keyPassword=\${{ secrets.KEY_STORE }} > ${{env.PROPERTIES_PATH}}
           echo storePassword=\${{ secrets.KEY_PASSWORD }} >> ${{env.PROPERTIES_PATH}}
           echo keyAlias=\${{ secrets.KEY_ALIAS }} >> ${{env.PROPERTIES_PATH}}
+
+      - name: Decode jks file
+        run: echo "${{ secrets.KEYSTORE2 }}" | base64 --decode > android/app/key.jks
 
       - name: Build apk
         run: | 
