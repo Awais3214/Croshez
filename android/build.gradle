@@ -6,6 +6,21 @@ allprojects {
 }
 
 rootProject.buildDir = '../build'
+subprojects{
+    afterEvaluate {
+        if(it.hasProperty('android')){
+            android {
+                compileSdkVersion 19
+                buildToolsVersion "19.0.0"
+
+                defaultConfig {
+                    minSdkVersion 9
+                    targetSdkVersion 14
+                }
+            }
+        }
+    }
+}
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
 }
