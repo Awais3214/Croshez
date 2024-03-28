@@ -6,7 +6,7 @@ on:
       - main
 
 env:
- PROPERTIES_PATH: "android/key.properties"
+ PROPERTIES_PATH: "./android/key.properties"
 
 jobs:
   deploy:
@@ -30,12 +30,11 @@ jobs:
 
       - name: Create key.properties file
         run: |
-          echo storeFile=android/app/key.jks > ${{env.PROPERTIES_PATH}} 
-          echo abcd > ${{env.PROPERTIES_PATH}} 
-          echo keyPassword=\${{ secrets.KEY_PASSWORD }} > ${{env.PROPERTIES_PATH}}
+          pwd
+          echo storeFile=android/app/key.jks >> ${{env.PROPERTIES_PATH}} 
+          echo keyPassword=\${{ secrets.KEY_PASSWORD }} >> ${{env.PROPERTIES_PATH}}
           echo storePassword=\${{ secrets.KEYSTORE_PASSWORD }} >> ${{env.PROPERTIES_PATH}}
           echo keyAlias=\${{ secrets.KEY_ALIAS }} >> ${{env.PROPERTIES_PATH}}
-          echo abcd > ${{env.PROPERTIES_PATH}} 
 
       - name: Print Key File Content
         run: cat android/key.properties
