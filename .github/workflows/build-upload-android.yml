@@ -30,21 +30,14 @@ jobs:
 
       - name: Create key.properties file
         run: |
-          pwd
           echo storeFile=android/app/key.jks >> ${{env.PROPERTIES_PATH}} 
           echo keyPassword=\${{ secrets.KEY_PASSWORD }} >> ${{env.PROPERTIES_PATH}}
           echo storePassword=\${{ secrets.KEYSTORE_PASSWORD }} >> ${{env.PROPERTIES_PATH}}
           echo keyAlias=\${{ secrets.KEY_ALIAS }} >> ${{env.PROPERTIES_PATH}}
 
-      - name: Print Key File Content
-        run: cat android/key.properties
-
-      # - name: Print Key File Content
-      #   run: cat android/app/key.jks
-
-      # - name: Build apk
-      #   run: | 
-      #     flutter clean && flutter pub get && flutter build apk
+      - name: Build apk
+        run: | 
+          flutter clean && flutter pub get && flutter build apk
 
       # - name: Decode JSON secret and write to file
       #   run: echo "${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}" | base64 -d > android/my_secret.json
