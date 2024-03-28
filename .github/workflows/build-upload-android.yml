@@ -25,14 +25,15 @@ jobs:
         with:
           flutter-version: '3.19.1'
 
+      - name: Decode jks file
+        run: echo "${{ secrets.KEYSTORE_FILE }}" | base64 --decode > android/app/key.jks
+
       - name: Create keystore.properties file
         run: |
-          echo keyPassword=\${{ secrets.KEY_STORE }} > ${{env.PROPERTIES_PATH}}
-          echo storePassword=\${{ secrets.KEY_PASSWORD }} >> ${{env.PROPERTIES_PATH}}
+          echo storeFile=\${{ secrets.KEYSTORE_FILE }} > ${{env.PROPERTIES_PATH}} 
+          echo keyPassword=\${{ secrets.KEY_PASSWORD }} > ${{env.PROPERTIES_PATH}}
+          echo storePassword=\${{ secrets.KEYSTORE_PASSWORD }} >> ${{env.PROPERTIES_PATH}}
           echo keyAlias=\${{ secrets.KEY_ALIAS }} >> ${{env.PROPERTIES_PATH}}
-
-      - name: Decode jks file
-        run: echo "${{ secrets.KEYSTORE }}" | base64 --decode > android/app/key.jks
 
       - name: Print Key File Content
         run: cat android/app/key.jks
