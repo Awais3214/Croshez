@@ -6,7 +6,7 @@ on:
       - main
 
 env:
- PROPERTIES_PATH: "android/key.properties"
+ PROPERTIES_PATH: "./android/key.properties"
 
 jobs:
   deploy:
@@ -36,7 +36,13 @@ jobs:
 
       - name: Build apk
         run: | 
-          flutter clean && flutter pub get && flutter build appbundle
+          flutter pub get && flutter build appbundle
+
+      - name: Upload artefato
+        uses: actions/upload-artifact@v2
+        with:
+          name: appbundle
+          path: build/app/outputs/bundle/release
 
       # - name: Decode JSON secret and write to file
       #   run: echo "${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}" | base64 -d > android/my_secret.json
