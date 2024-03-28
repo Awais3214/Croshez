@@ -27,6 +27,9 @@ jobs:
 
       - name: Decode jks file
         run: echo "${{ secrets.KEYSTORE_FILE }}" | base64 --decode > android/app/key.jks
+        
+      - name: Print Key File Content
+        run: cat android/key.properties
 
       - name: Create key.properties file
         run: |
@@ -35,6 +38,7 @@ jobs:
           echo keyPassword=\${{ secrets.KEY_PASSWORD }} > ${{env.PROPERTIES_PATH}}
           echo storePassword=\${{ secrets.KEYSTORE_PASSWORD }} >> ${{env.PROPERTIES_PATH}}
           echo keyAlias=\${{ secrets.KEY_ALIAS }} >> ${{env.PROPERTIES_PATH}}
+          echo abcd > ${{env.PROPERTIES_PATH}} 
 
       - name: Print Key File Content
         run: cat android/key.properties
