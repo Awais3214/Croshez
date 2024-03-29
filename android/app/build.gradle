@@ -55,7 +55,7 @@ android {
     signingConfigs {
         release {
             if (keystorePropertiesFile.exists()) {
-                storeFile = keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+                storeFile = /home/runner/work/Croshez/Croshez/android/app/key.jks
                 keyPassword keystoreProperties['keyPassword']
                 storePassword keystoreProperties['storePassword']
                 keyAlias keystoreProperties['keyAlias']
