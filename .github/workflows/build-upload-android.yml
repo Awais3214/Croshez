@@ -42,7 +42,7 @@ jobs:
           echo storePassword=\${{ secrets.KEYSTORE_PASSWORD }} >> ${{env.PROPERTIES_PATH}}
           echo keyAlias=\${{ secrets.KEY_ALIAS }} >> ${{env.PROPERTIES_PATH}}
 
-      - name: Build apk
+      - name: Build app bundle
         run: | 
           flutter pub get && flutter build appbundle
 
