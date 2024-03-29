@@ -6,7 +6,7 @@ on:
       - main
 
 env:
- PROPERTIES_PATH: "./android/key.properties"
+ PROPERTIES_PATH: "../android/key.properties"
 
 jobs:
   deploy:
@@ -26,7 +26,7 @@ jobs:
           flutter-version: '3.19.1'
 
       - name: Decode jks file
-        run: echo "${{ secrets.KEYSTORE_FILE }}" | base64 --decode > android/app/key.jks
+        run: echo "${{ secrets.KEYSTORE_FILE }}" | base64 --decode > ../android/app/key.jks
 
       - name: Create key.properties file
         run: |
