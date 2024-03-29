@@ -30,7 +30,7 @@ jobs:
 
       - name: Path
         run: |
-          cd android && ls
+          cd android/app && ls
 
 
       # - name: Print jks file path
