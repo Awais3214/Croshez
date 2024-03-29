@@ -37,7 +37,7 @@ jobs:
 
       - name: Create key.properties file
         run: |
-          echo storeFile=${{ GITHUB_WORKSPACE }}/android/app/key.jks >> ${{env.PROPERTIES_PATH}}
+          echo storeFile=${{ GITHUB WORKSPACE }}/android/app/key.jks >> ${{env.PROPERTIES_PATH}}
           echo keyPassword=\${{ secrets.KEY_PASSWORD }} >> ${{env.PROPERTIES_PATH}}
           echo storePassword=\${{ secrets.KEYSTORE_PASSWORD }} >> ${{env.PROPERTIES_PATH}}
           echo keyAlias=\${{ secrets.KEY_ALIAS }} >> ${{env.PROPERTIES_PATH}}
