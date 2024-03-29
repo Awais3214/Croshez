@@ -31,6 +31,9 @@ jobs:
       - name: Print jks file path
         run: sh "find android/app -name key.jks"
 
+      - name: Print jks file path
+        run: cat android/app/key.jks
+
       - name: Create key.properties file
         run: |
           echo storeFile=key.jks >> ${{env.PROPERTIES_PATH}}
