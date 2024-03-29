@@ -28,8 +28,8 @@ jobs:
       - name: Decode jks file
         run: echo "${{ secrets.KEYSTORE_FILE }}" | base64 --decode > android/app/key.jks
 
-      - name: Print jks file path
-        run: sh "find android/app -name key.jks"
+      # - name: Print jks file path
+      #   run: sh "find android/app -name key.jks"
 
       - name: Print jks file path
         run: cat android/app/key.jks
