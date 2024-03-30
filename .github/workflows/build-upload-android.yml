@@ -28,12 +28,12 @@ jobs:
       - name: Decode jks file
         run: echo "${{ secrets.KEYSTORE_FILE }}" | base64 --decode > android/app/key.jks
 
-      - name: Path
-        run: |
-          cd android/app && ls
+      # - name: Path
+      #   run: |
+      #     cd android/app && ls
 
-      - name: Print jks file path
-        run: cat android/app/key.jks
+      # - name: Print jks file path
+      #   run: cat android/app/key.jks
 
       - name: Create key.properties file
         run: |
@@ -42,12 +42,12 @@ jobs:
           echo storePassword=\${{ secrets.KEYSTORE_PASSWORD }} >> ${{env.PROPERTIES_PATH}}
           echo keyAlias=\${{ secrets.KEY_ALIAS }} >> ${{env.PROPERTIES_PATH}}
 
-      - name: Print key.properties
-        run: cat ./android/key.properties
+      # - name: Print key.properties
+      #   run: cat ./android/key.properties
 
-      - name: Build app bundle
-        run: | 
-          flutter pub get && flutter build appbundle
+      # - name: Build app bundle
+      #   run: | 
+      #     flutter pub get && flutter build appbundle
 
       # - name: Upload artefato
       #   uses: actions/upload-artifact@v2
@@ -55,8 +55,8 @@ jobs:
       #     name: appbundle
       #     path: build/app/outputs/bundle/release
 
-      # - name: Decode JSON secret and write to file
-      #   run: echo "${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}" | base64 -d > android/my_secret.json
+      - name: Decode JSON secret and write to file
+        run: echo "${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}" | base64 -d > android/my_secret.json
       
       # - name: Set proper permissions for the JSON file
       #   run: chmod 644 android/my_secret.json
@@ -73,6 +73,6 @@ jobs:
       # - name: Install Flutter Dependencies
       #   run: flutter pub get
 
-      # - name: Fastlane Deploy
-      #   run: |
-      #     cd android && fastlane android deploy
+      - name: Fastlane Deploy
+        run: |
+          cd android && fastlane android deploy
