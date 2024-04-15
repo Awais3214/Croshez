@@ -75,4 +75,4 @@ jobs:
 
       - name: Fastlane Deploy
         run: |
-          $ bundle exec cd android && fastlane android deploy
+          cd android && fastlane android deploy
