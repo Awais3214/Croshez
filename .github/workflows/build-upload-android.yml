@@ -5,51 +5,74 @@ on:
     branches:
       - main
 
+env:
+  PROPERTIES_PATH: "./android/key.properties"
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Set up ruby env
-        uses: ruby/setup-ruby@v1
+      - uses: actions/checkout@v3
         with:
-          ruby-version: 3.2.2
-          bundler-cache: true
+          fetch-depth: 0
 
-      - name: Decode Service Account Key JSON File
-        uses: timheuer/base64-to-file@v1
-        id: service_account_json_file
+      - uses: actions/setup-java@v2
         with:
-          fileName: "serviceAccount.json"
-          encodedString: ${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}
+          java-version: "17"
+          distribution: "temurin"
 
-      - name: Decode Keystore File
-        uses: timheuer/base64-to-file@v1
-        id: android_keystore
+      - uses: subosito/flutter-action@v2
         with:
-          fileName: "android_keystore.keystore"
-          encodedString: ${{ secrets.KEYSTORE_FILE }}
+          flutter-version: "3.19.1"
 
-      - name: Create Service Account JSON File
+      - name: Decode jks file
+        run: echo "${{ secrets.KEYSTORE_FILE }}" | base64 --decode > android/app/key.jks
+
+      # - name: Path
+      #   run: |
+      #     cd android/app && ls
+
+      # - name: Print jks file path
+      #   run: cat android/app/key.jks
+
+      - name: Create key.properties file
         run: |
-          echo "${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}" > /home/runner/work/Croshez/Croshez/android/Gplay.json
-        shell: bash
+          echo storeFile=${{ github.workspace }}/android/app/key.jks >> ${{env.PROPERTIES_PATH}}
+          echo keyPassword=\${{ secrets.KEY_PASSWORD }} >> ${{env.PROPERTIES_PATH}}
+          echo storePassword=\${{ secrets.KEYSTORE_PASSWORD }} >> ${{env.PROPERTIES_PATH}}
+          echo keyAlias=\${{ secrets.KEY_ALIAS }} >> ${{env.PROPERTIES_PATH}}
 
-      - name: Build & deploy Android release
+      # - name: Print key.properties
+      #   run: cat ./android/key.properties
+
+      # - name: Build app bundle
+      #   run: |
+      #     flutter pub get && flutter build appbundle
+
+      # - name: Upload artefato
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: appbundle
+      #     path: build/app/outputs/bundle/release
+
+      - name: Decode JSON secret and write to file
+        run: echo "${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}" | base64 -d > android/my_secret.json
+
+      # - name: Set proper permissions for the JSON file
+      #   run: chmod 644 android/my_secret.json
+
+      # - name: Print JSON Key File Content
+      #   run: cat android/my_secret.json
+
+      # - name: Update packages
+      #   run: flutter pub outdated
+
+      # - name: Clean build
+      #   run: flutter clean
+
+      # - name: Install Flutter Dependencies
+      #   run: flutter pub get
+
+      - name: Fastlane Deploy
         run: |
-          cd android && bundle exec fastlane android deploy
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}
-          KEYSTORE_FILE: ${{ steps.android_keystore.outputs.filePath }}
-          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-          KEY_ALIAS: ${{ secrets.KEY_ALIAS}}
-          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-          ANDROID_JSON_KEY_FILE: ${{ steps.service_account_json_file.outputs.filePath }}
-
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: assets
-          path: |
-            ${{ github.workspace }}/app/build/outputs/bundle/app-release.aab
+          cd android && fastlane android deploy
