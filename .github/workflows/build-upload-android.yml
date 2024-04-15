@@ -42,8 +42,8 @@ jobs:
           echo storePassword=\${{ secrets.KEYSTORE_PASSWORD }} >> ${{env.PROPERTIES_PATH}}
           echo keyAlias=\${{ secrets.KEY_ALIAS }} >> ${{env.PROPERTIES_PATH}}
 
-      # - name: Print key.properties
-      #   run: cat ./android/key.properties
+      - name: Print key.properties
+        run: cat ./android/key.properties
 
       # - name: Build app bundle
       #   run: |
