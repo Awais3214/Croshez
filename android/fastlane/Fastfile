@@ -1,18 +1,18 @@
 # This file contains the fastlane.tools configuration
 
-flavorDimensions "version"  
-productFlavors {  
- create("demo") {  
- dimension = "version"  
- applicationIdSuffix = ".demo"  
- versionNameSuffix = "-demo"  
- }  
- create("full") {  
- dimension = "version"  
- applicationIdSuffix = ".full"  
- versionNameSuffix = "-full"  
- }  
-}
+# flavorDimensions "version"  
+# productFlavors {  
+#  create("demo") {  
+#  dimension = "version"  
+#  applicationIdSuffix = ".demo"  
+#  versionNameSuffix = "-demo"  
+#  }  
+#  create("full") {  
+#  dimension = "version"  
+#  applicationIdSuffix = ".full"  
+#  versionNameSuffix = "-full"  
+#  }  
+# }
 
 default_platform(:android)
 
