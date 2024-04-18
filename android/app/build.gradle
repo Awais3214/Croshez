@@ -52,7 +52,24 @@ android {
         versionName flutterVersionName
     }
 
-    
+    productFlavors {
+        dev {
+                dimension "Croshez"
+                applicationIdSuffix ".dev"
+                resValue "string", "app_name", "Croshez Dev"
+                versionNameSuffix ".dev"
+                versionCode 25
+                versionName "1.0.0"
+        }
+        prod {
+                dimension "Croshez"
+                resValue "string", "app_name", "Croshez"
+                versionNameSuffix ".prod"
+                versionCode 12
+                versionName "1.0.0"
+        }
+    }
+
     signingConfigs {
        release {
            keyAlias keystoreProperties['keyAlias']
@@ -62,12 +79,16 @@ android {
        }
    }
 
-    buildTypes {
-        release {
-            minifyEnabled true
-            shrinkResources true
-            signingConfig signingConfigs.release
-        }
+    buildTypes {  
+        debug {  
+        applicationIdSuffix ".debug"  
+        debuggable true  
+        }  
+
+        release {  
+        signingConfig signingConfigs.release  
+        minifyEnabled true 
+        }  
     }
 }
 
