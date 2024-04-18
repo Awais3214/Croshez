@@ -61,16 +61,6 @@ android {
            storePassword keystoreProperties['storePassword']
        }
    }
-    /* signingConfigs {
-        release {
-            if (keystorePropertiesFile.exists()) {
-                storeFile = /home/runner/work/Croshez/Croshez/android/app/key.jks
-                keyPassword keystoreProperties['keyPassword']
-                storePassword keystoreProperties['storePassword']
-                keyAlias keystoreProperties['keyAlias']
-            }
-        }
-    } */
 
     buildTypes {
         release {
