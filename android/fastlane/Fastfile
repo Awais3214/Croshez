@@ -11,7 +11,7 @@ platform :android do
 desc "Build"
 lane :build do
   gradle(
-      task: "assemble",
+      task: "assembleProdRelease",
       flavor: "prod",
       build_type: "Release"
   )
