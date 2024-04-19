@@ -52,23 +52,10 @@ android {
         versionName flutterVersionName
     }
 
-    flavorDimensions "version"  
-        productFlavors {  
-        create("demo") {  
-        dimension = "version"  
-        applicationIdSuffix = ".demo"  
-        versionNameSuffix = "-demo"  
-        }  
-        create("full") {  
-        dimension = "version"  
-        applicationIdSuffix = ".full"  
-        versionNameSuffix = "-full"  
-        }  
-    }
-
+    flavorDimensions "croshez"  
     productFlavors {
         dev {
-                dimension "Croshez"
+                dimension "croshez"
                 applicationIdSuffix ".dev"
                 resValue "string", "app_name", "Croshez Dev"
                 versionNameSuffix ".dev"
@@ -76,7 +63,7 @@ android {
                 versionName "1.0.0"
         }
         prod {
-                dimension "Croshez"
+                dimension "croshez"
                 resValue "string", "app_name", "Croshez"
                 versionNameSuffix ".prod"
                 versionCode 12
