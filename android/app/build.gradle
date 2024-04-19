@@ -52,6 +52,20 @@ android {
         versionName flutterVersionName
     }
 
+    flavorDimensions "version"  
+        productFlavors {  
+        create("demo") {  
+        dimension = "version"  
+        applicationIdSuffix = ".demo"  
+        versionNameSuffix = "-demo"  
+        }  
+        create("full") {  
+        dimension = "version"  
+        applicationIdSuffix = ".full"  
+        versionNameSuffix = "-full"  
+        }  
+    }
+
     productFlavors {
         dev {
                 dimension "Croshez"
