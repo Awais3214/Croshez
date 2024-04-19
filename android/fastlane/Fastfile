@@ -12,7 +12,7 @@ desc "Build"
 lane :build do
   gradle(
       task: "assemble",
-      flavor: "dev",
+      flavor: "prod",
       build_type: "Release"
   )
 end
