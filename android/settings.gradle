@@ -22,5 +22,10 @@ plugins {
     id "org.jetbrains.kotlin.android" version "1.7.10" apply false
 }
 
-include ":app"
+include ':app'
+setBinding(new Binding([gradle: this]))
+evaluate(new File(
+    settingsDir.parentFile,
+    'flutter/packages/flutter_tools/gradle/flutter.gradle'
+))
 
