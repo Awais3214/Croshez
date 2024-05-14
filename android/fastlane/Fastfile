@@ -34,7 +34,7 @@ platform :android do
       skip_upload_changelogs: true,
       skip_upload_metadata: true,
       # validate_only: true,
-      aab: "#{ENV['GITHUB_WORKSPACE']}/build/app/outputs/bundle/release/prodRelease/app-release.aab", # Adjusted path
+      aab: "#{ENV['GITHUB_WORKSPACE']}/build/app/outputs/bundle/release/prodRelease/app-prod-release.aab", # Adjusted path
       # json_key: "#{ENV['GITHUB_WORKSPACE']}/android/my_secret.json",
     )
   end
