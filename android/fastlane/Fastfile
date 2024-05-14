@@ -8,14 +8,14 @@ platform :android do
     gradle(task: "test")
   end
 
-desc "Build"
-lane :build do
-  gradle(
-      task: "assembleProdRelease",
+  desc "Build"
+  lane :build do
+    gradle(
+      task: "assemble",
       flavor: "prod",
       build_type: "Release"
-  )
-end
+    )
+  end
 
   desc "Deploy a new version to the Google Play"
   lane :deploy do

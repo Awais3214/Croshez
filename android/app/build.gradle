@@ -44,12 +44,33 @@ android {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
+    flavorDimensions "croshez"
+
+    productFlavors {
+        dev {
+            dimension "croshez"
+            applicationIdSuffix ".dev"
+            resValue "string", "app_name", "Croshez Dev"
+            versionNameSuffix ".dev"
+            versionCode 25
+            versionName "1.0.0"
+        }
+        prod {
+            dimension "croshez"
+            resValue "string", "app_name", "Croshez"
+            versionNameSuffix ".prod"
+            versionCode 12
+            versionName "1.0.0"
+        }
+    }
+
     defaultConfig {
         applicationId "com.weoveri.croshez"
         minSdkVersion 21
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        multiDexEnabled true
     }
 
     flavorDimensions "croshez"  
@@ -98,5 +119,6 @@ flutter {
 }
 
 dependencies {
+    implementation 'com.android.support:multidex:1.0.3'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlin_version}"
 }
