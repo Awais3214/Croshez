@@ -3,6 +3,14 @@ allprojects {
         google()
         mavenCentral()
     }
+    buildscript {
+        repositories {
+            google()
+        }
+        dependencies {
+            classpath 'com.android.tools.build:gradle:4.0.0'
+        }
+    }
 }
 
 rootProject.buildDir = '../build'
