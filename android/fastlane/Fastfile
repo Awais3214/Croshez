@@ -8,7 +8,7 @@ platform :android do
     gradle(task: "test")
   end
 
-  desc "Deploy a new version to the Google Play"
+  desc "Deploy a new prod version to the Google Play"
   lane :deploy do
     # Upload the app bundle to Google Play
     upload_to_play_store(
@@ -18,6 +18,19 @@ platform :android do
       skip_upload_metadata: true,
       validate_only: true,
       aab: "#{ENV['GITHUB_WORKSPACE']}/build/app/outputs/bundle/prodRelease/app-prod-release.aab",
+    )
+  end
+
+  desc "Deploy a new dev version to the Google Play"
+  lane :deployDev do
+    # Upload the app bundle to Google Play
+    upload_to_play_store(
+      track: 'internal',
+      skip_upload_apk: true,
+      skip_upload_changelogs: true,
+      skip_upload_metadata: true,
+      validate_only: true,
+      aab: "#{ENV['GITHUB_WORKSPACE']}/build/app/outputs/bundle/devRelease/app-dev-release.aab",
     )
   end
 end
