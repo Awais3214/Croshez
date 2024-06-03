@@ -1,9 +1,10 @@
 name: Android Build & Deploy
 
 on:
-  push:
+  pull_request:
     branches:
       - main
+      - dev
 
 env:
   PROPERTIES_PATH: "./android/key.properties"
@@ -11,6 +12,9 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
+    # if: github.event.pull_request.base.ref == 'main'
+
     steps:
       - uses: actions/checkout@v3
         with:
@@ -27,13 +31,6 @@ jobs:
 
       - name: Decode jks file
         run: echo "${{ secrets.KEYSTORE_FILE }}" | base64 --decode > android/app/key.jks
-
-      # - name: Path
-      #   run: |
-      #     cd android/app && ls
-
-      # - name: Print jks file path
-      #   run: cat android/app/key.jks
 
       - name: Create key.properties file
         run: |
@@ -61,11 +58,11 @@ jobs:
       - name: Set proper permissions for the JSON file
         run: chmod 644 android/my_secret.json
 
-      # - name: Print JSON Key File Content
-      #   run: cat android/my_secret.json
+      - name: Print JSON Key File Content
+        run: cat android/my_secret.json
 
-      # - name: Update packages
-      #   run: flutter pub outdated
+      - name: Update packages
+        run: flutter pub outdated
 
       - name: Clean build
         run: flutter clean
@@ -73,10 +70,12 @@ jobs:
       - name: Install Flutter Dependencies
         run: flutter pub get
 
-      # - name: Fastlane Build
-      #   run: |
-      #     cd android && fastlane android build && fastlane android deploy
-
       - name: Fastlane Deploy
+        if: github.event.pull_request.base.ref == 'main'
         run: |
           cd android && flutter build appbundle --flavor prod && fastlane android deploy
+
+      - name: Fastlane Deploy
+        if: github.event.pull_request.base.ref == 'dev'
+        run: |
+          cd android && flutter build appbundle --flavor dev && fastlane android deploy
