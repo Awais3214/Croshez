@@ -20,7 +20,6 @@ platform :android do
       aab: "#{ENV['GITHUB_WORKSPACE']}/build/app/outputs/bundle/prodRelease/app-prod-release.aab",
     )
   end
-end
 
   desc "Deploy a new dev version to the Google Play"
   lane :deployDev do
