@@ -20,6 +20,7 @@ platform :android do
       aab: "#{ENV['GITHUB_WORKSPACE']}/build/app/outputs/bundle/prodRelease/app-prod-release.aab",
     )
   end
+end
 
   desc "Deploy a new dev version to the Google Play"
   lane :deployDev do
@@ -30,7 +31,6 @@ platform :android do
       skip_upload_changelogs: true,
       skip_upload_metadata: true,
       validate_only: true,
-      package_name: 'com.weoveri.croshez.dev'
       aab: "#{ENV['GITHUB_WORKSPACE']}/build/app/outputs/bundle/devRelease/app-dev-release.aab",
     )
   end
