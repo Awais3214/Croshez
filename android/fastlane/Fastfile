@@ -26,6 +26,7 @@ platform :android do
     # Upload the app bundle to Google Play
     upload_to_play_store(
       track: 'internal',
+      release_status: 'draft',
       skip_upload_apk: true,
       skip_upload_changelogs: true,
       skip_upload_metadata: true,
