@@ -58,9 +58,9 @@ jobs:
       - name: Fastlane Deploy
         if: github.event.pull_request.base.ref == 'main'
         run: |
-          cd android && flutter build appbundle --flavor prod && bundle exec fastlane android deploy
+          cd android && flutter build appbundle --flavor prod && fastlane android deploy
 
       - name: Fastlane Deploy
         if: github.event.pull_request.base.ref == 'dev'
         run: |
-          cd android && flutter build appbundle --flavor dev && bundle exec fastlane android deployDev
+          cd android && flutter build appbundle --flavor dev && fastlane android deployDev
