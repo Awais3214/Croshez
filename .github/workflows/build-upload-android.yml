@@ -40,24 +40,11 @@ jobs:
       - name: Print key.properties
         run: cat ./android/key.properties
 
-      # - name: Build app bundle
-      #   run: |
-      #     flutter pub get && flutter build appbundle
-
-      # - name: Upload artefato
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: appbundle
-      #     path: build/app/outputs/bundle/release
-
       - name: Decode JSON secret and write to file
         run: echo "${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}" | base64 -d > android/my_secret.json
 
       - name: Set proper permissions for the JSON file
         run: chmod 644 android/my_secret.json
-
-      - name: Print JSON Key File Content
-        run: cat android/my_secret.json
 
       - name: Update packages
         run: flutter pub outdated
@@ -71,9 +58,9 @@ jobs:
       - name: Fastlane Deploy
         if: github.event.pull_request.base.ref == 'main'
         run: |
-          cd android && flutter build appbundle --flavor prod && fastlane android deploy
+          cd android && flutter build appbundle --flavor prod && bundle exec fastlane android deploy
 
       - name: Fastlane Deploy
         if: github.event.pull_request.base.ref == 'dev'
         run: |
-          cd android && flutter build appbundle --flavor dev && fastlane android deployDev
+          cd android && flutter build appbundle --flavor dev && bundle exec fastlane android deployDev
