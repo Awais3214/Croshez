@@ -52,7 +52,7 @@ dependencies:
   equatable: ^2.0.5
   bloc: ^8.1.2
 
-  #DateTime extentions
+  # DateTime extentions
   intl: ^0.18.1 # Provides internationalization and localization facilities, including message translation, plurals and genders, date/number formatting and parsing, and bidirectional text.
   firebase_core: ^2.13.0
   google_sign_in: ^6.1.0
@@ -60,7 +60,7 @@ dependencies:
   firebase_auth: ^4.6.1
   cloud_firestore: ^4.7.1
   package_info_plus: ^6.0.0
-  # Bloc
+  # BloC
   firebase_storage: ^11.2.2
   image_picker: ^0.8.7+5
   flutter_launcher_icons: ^0.13.1
